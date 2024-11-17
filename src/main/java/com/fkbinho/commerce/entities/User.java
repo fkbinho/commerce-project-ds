@@ -19,6 +19,9 @@ public class User {
     private LocalDate birthDate;
     private String passsword;
 
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
+
     public User(){
     }
 
@@ -77,5 +80,9 @@ public class User {
 
     public void setPasssword(String passsword) {
         this.passsword = passsword;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
     }
 }
