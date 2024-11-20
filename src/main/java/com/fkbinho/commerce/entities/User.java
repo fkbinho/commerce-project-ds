@@ -20,7 +20,7 @@ public class User {
 
     private String phone;
     private LocalDate birthDate;
-    private String passsword;
+    private String password;
 
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
@@ -28,13 +28,13 @@ public class User {
     public User(){
     }
 
-    public User(Long id, String name, String email, String phone, LocalDate birthDate, String passsword) {
+    public User(Long id, String name, String email, String phone, LocalDate birthDate, String password) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.birthDate = birthDate;
-        this.passsword = passsword;
+        this.password = password;
     }
 
     public Long getId() {
@@ -77,12 +77,12 @@ public class User {
         this.birthDate = birthDate;
     }
 
-    public String getPasssword() {
-        return passsword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasssword(String passsword) {
-        this.passsword = passsword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Order> getOrders() {
