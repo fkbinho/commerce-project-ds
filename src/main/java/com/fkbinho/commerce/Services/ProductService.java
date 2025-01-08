@@ -3,8 +3,10 @@ package com.fkbinho.commerce.Services;
 import com.fkbinho.commerce.Repositories.ProductRepository;
 import com.fkbinho.commerce.Services.exceptions.DatabaseException;
 import com.fkbinho.commerce.Services.exceptions.ResourceNotFoundException;
+import com.fkbinho.commerce.dto.CategoryDTO;
 import com.fkbinho.commerce.dto.ProductDTO;
 import com.fkbinho.commerce.dto.ProductMinDTO;
+import com.fkbinho.commerce.entities.Category;
 import com.fkbinho.commerce.entities.Product;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,5 +76,12 @@ public class ProductService {
         entity.setDescription(productDTO.getDescription());
         entity.setPrice(productDTO.getPrice());
         entity.setImgUrl(productDTO.getImgUrl());
+
+        entity.getCategories().clear();
+        for (CategoryDTO catDto : productDTO.getCategories()) {
+            Category cat = new Category();
+            cat.setId(catDto.getId());
+            entity.getCategories().add(cat);
+        }
     }
 }
