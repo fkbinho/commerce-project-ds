@@ -4,9 +4,9 @@ import com.fkbinho.commerce.Repositories.ProductRepository;
 import com.fkbinho.commerce.Services.exceptions.DatabaseException;
 import com.fkbinho.commerce.Services.exceptions.ResourceNotFoundException;
 import com.fkbinho.commerce.dto.ProductDTO;
+import com.fkbinho.commerce.dto.ProductMinDTO;
 import com.fkbinho.commerce.entities.Product;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.exception.DataException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
@@ -30,9 +30,9 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Page<ProductDTO> findAll(String name, Pageable pageable) {
+    public Page<ProductMinDTO> findAll(String name, Pageable pageable) {
         Page<Product> result = productRepository.searchByName(name, pageable);
-        return result.map(x -> new ProductDTO(x));
+        return result.map(x -> new ProductMinDTO(x));
     }
 
     @Transactional

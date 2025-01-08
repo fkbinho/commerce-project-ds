@@ -2,6 +2,7 @@ package com.fkbinho.commerce.controllers;
 
 import com.fkbinho.commerce.Services.ProductService;
 import com.fkbinho.commerce.dto.ProductDTO;
+import com.fkbinho.commerce.dto.ProductMinDTO;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,11 +28,11 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDTO>> findAll(
+    public ResponseEntity<Page<ProductMinDTO>> findAll(
             @RequestParam(name = "name", defaultValue = "") String name,
             Pageable pageable) {
-        Page<ProductDTO> productDTO = productService.findAll(name, pageable);
-        return ResponseEntity.ok(productDTO);
+        Page<ProductMinDTO> dto = productService.findAll(name, pageable);
+        return ResponseEntity.ok(dto);
     }
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
