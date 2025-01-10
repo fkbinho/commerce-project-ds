@@ -1,6 +1,7 @@
 package com.fkbinho.commerce.controllers.handlers;
 
 import com.fkbinho.commerce.Services.exceptions.DatabaseException;
+import com.fkbinho.commerce.Services.exceptions.ForbiddenException;
 import com.fkbinho.commerce.Services.exceptions.ResourceNotFoundException;
 import com.fkbinho.commerce.dto.CustomError;
 import com.fkbinho.commerce.dto.ValidationError;
@@ -40,6 +41,13 @@ public class ControllerExceptionHandler {
             err.addError(f.getField(), f.getDefaultMessage());
         }
 
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ExceptionHandler(ForbiddenException.class)
+    public ResponseEntity<CustomError> forbidden (ForbiddenException e, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        CustomError err = new CustomError(Instant.now(), status.value(), e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
 }
